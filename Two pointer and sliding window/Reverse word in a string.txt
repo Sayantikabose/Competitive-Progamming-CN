@@ -1,0 +1,48 @@
+You are given a string of length N. You need to reverse the string word by word. 
+There can be multiple spaces between two words and there can be leading or trailing spaces but in the output reversed string you need to put a single space between two words, and your reversed string should not contain leading or trailing spaces.
+
+//code
+#include<vector> 
+#include <bits/stdc++.h>
+#include<cstring>
+string reverseString(string str)
+{
+    vector<string> ans;
+    int l= str.length();
+    string word;
+    for(int i=0;i<l;i++)
+    {
+        if(str[i]==' ' && str[i+1]==' ')
+        {
+         	
+            continue;
+        }
+        else if(str[i]==' ' && str[i+1]!=' ')
+        {
+  			ans.push_back(word);
+         	word="";          
+        }
+        else
+        { 	
+           word+=str[i]; 
+        }
+    }
+    ans.push_back(word);
+    string res;
+    for(int i=ans.size()-1;i>=0;i--)
+    {
+        res.append(ans[i]);
+        res.append(" ");   
+    }
+    res.pop_back();
+    int len=res.length();
+    if(res[len-1] == ' ')
+        res.pop_back();
+    if(res[0]==' ')
+    {
+        for(int i=0;i<len;i++)
+            res[i]=res[i+1];
+    }
+    return res;
+
+}
