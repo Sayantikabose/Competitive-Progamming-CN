@@ -1,0 +1,26 @@
+Longest Sub-string with at most K Distinct Characters
+
+#include<unordered_map>
+int getLengthofLongestSubstring(int k, string s)
+{
+   // Write your code here.
+    int ans = 0;
+    unordered_map<char, int> m;
+    int n = s.size();
+    int x = 0;
+    for (int j = 0, i = 0; j < n; j++) 
+    {
+         m[s[j]]++;
+         if (m[s[j]] == 1)
+            x++;
+         while (x > k && i <= j) {
+            m[s[i]]--;
+            if (m[s[i]] == 0)
+               x--;
+            i++;
+         }
+           ans = max(ans, j - i + 1);
+      }
+      return ans;
+   
+}
