@@ -1,0 +1,76 @@
+2 Sum
+Send Feedback
+You are given an array of integers 'ARR' of length 'N' and an integer Target. Your task is to return all pairs of elements such that they add up to Target.
+Note:
+We cannot use the element at a given index twice.
+
+Constraints:
+1 <= T <= 100
+1 <= N <= 5000
+-10 ^ 9 <= TARGET <=10 ^ 9
+-10 ^ 9 <= ARR[i] <=10 ^ 9
+
+Where 'T' denotes the number of test cases, 'N' represents the size of the array, 'TARGET' represents the sum required, and 'ARR[i]' represents array elements.
+
+Time Limit: 1 sec.
+Sample Input 1 :
+2
+4 9
+2 7 11 13
+5 1
+1 -1 -1 2 2
+Sample Output 1:
+2 7
+-1 2
+-1 2
+Explanation for Sample 1:
+For the first test case, we can see that the sum of  2 and 7 is equal to 9 and it is the only valid pair.
+
+For the second test case, there are two valid pairs (-1,2) and (-1,2), which add up to 1.
+Sample Input 2 :
+1
+4 16
+2 7 11 13
+Sample Output 2 :
+-1 -1
+//code
+#include<bits/stdc++.h>
+#include<vector>
+vector<pair<int,int>> twoSum(vector<int>& arr, int target, int n)
+{
+	// Write your code here.
+    sort(arr.begin(), arr.end());
+    vector<pair<int,int>> ans;
+    int lower=arr[0]+arr[1];
+    int upper=arr[n-1]+arr[n-2];
+    if(target<lower || target > upper)
+    { 	
+        ans.push_back({-1,-1});
+     	return ans;
+    }
+    int f=0;
+    int s=n-1;
+    while(f<s)
+    {
+        if((arr[f]+arr[s])==target)
+        {	
+            ans.push_back({arr[f],arr[s]});
+            f++;
+            s--;
+        }
+        else if((arr[f]+arr[s])<target)
+			f++;
+      else
+            s--;
+    }
+    if(ans.size()>0)
+        return ans;
+    else
+    {
+        pair<int, int> p(-1, -1);
+
+       ans.push_back(p);
+
+       return ans;
+    }
+    
